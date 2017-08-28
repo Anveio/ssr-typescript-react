@@ -1,0 +1,18 @@
+{
+  "name": "advanced-react",
+  "version": "1.0.0",
+  "main": "./lib/server.js",
+  "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "ts-jest": "^20.0.10",
+    "tslint": "^5.7.0",
+    "tslint-react": "^3.2.0",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "pug": "^2.0.0-rc.3"
+  }
+}
