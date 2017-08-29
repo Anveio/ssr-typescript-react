@@ -1,9 +1,9 @@
 doctype html
 html
   head
-    title= `${answer}`
+    title=title
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-    #root
-      h1 Loading...
-    script(src="/bundle.js")
+    block content
+      div#root!= content
+      script(src='/bundle.js' type='text/javascript')
