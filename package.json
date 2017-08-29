@@ -5,7 +5,7 @@
   "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "pm2 start pm2.json",
+    "dev": "NODE_PATH=./lib pm2 start server.ts --watch",
     "webpack": "webpack -wd",
     "test": "jest --watch"
   },
@@ -36,11 +36,7 @@
     "webpack": "^3.5.5"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": [ "ts", "tsx", "js" ],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },

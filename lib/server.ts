@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { config } from './config';
-import serverRender from './serverRender';
+import serverRender from './renderers/server';
 // import * as pug from 'pug';
 
 const app = express();

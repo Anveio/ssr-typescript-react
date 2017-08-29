@@ -12,6 +12,7 @@ describe('ArticleList', () => {
   };
 
   it('renders correctly', () => {
+    // tslint:disable
     const tree = renderer
       .create(<ArticleList {...testProps as any} />)
       .toJSON();
