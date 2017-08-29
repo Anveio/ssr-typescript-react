@@ -1,14 +1,21 @@
 import * as express from 'express';
 import { config } from './config';
 import serverRender from './renderers/server';
-// import * as pug from 'pug';
+import { data } from './testData';
+
+const stringify = require('javascript-stringify');
 
 const app = express();
 app.use(express.static('public'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
-app.get('/', (req: express.Request, res: express.Response) => {
-  res.render('index', { title: 'My Apperino', content: serverRender() });
+app.get('/', async (req: express.Request, res: express.Response) => {
+  const content = await serverRender();
+  res.render('index', { title: 'My apperino.', content, stringify });
+});
+
+app.get('/data', (req: express.Request, res: express.Response) => {
+  res.send(data);
 });
 
 app.listen(config.port, () => {

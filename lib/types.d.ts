@@ -1,4 +1,6 @@
-interface ApiSchema {
+type DataType = Article | Author;
+
+interface ApiResponse {
   articles: Article[];
   authors: Author[];
 }
@@ -18,6 +20,10 @@ interface Author {
   website: string;
 }
 
+interface PlainObj<T extends DataType> {
+  [key: string]: T;
+}
+
 interface ArticleActionsMap {
-  lookupAuthor: (authorId: string) => Author | undefined
+  lookupAuthor: (authorId: string) => Author | undefined;
 }

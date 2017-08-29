@@ -1,11 +1,11 @@
 {
   "name": "advanced-react",
   "version": "1.0.0",
-  "main": "./lib/server.js",
+  "main": "./lib/server.ts",
   "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_PATH=./lib pm2 start server.ts --watch",
+    "dev": "pm2 start ./lib/server.ts --interpreter ts-node --watch",
     "webpack": "webpack -wd",
     "test": "jest --watch"
   },
@@ -19,6 +19,7 @@
     "@types/react-test-renderer": "^15.5.4",
     "awesome-typescript-loader": "^3.2.3",
     "jest": "^20.0.4",
+    "nodemon": "^1.11.0",
     "source-map-loader": "^0.2.1",
     "ts-jest": "^20.0.10",
     "tslint": "^5.7.0",
@@ -26,7 +27,10 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
+    "axios": "^0.16.2",
+    "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "javascript-stringify": "^1.6.0",
     "pm2": "^2.6.1",
     "pug": "^2.0.0-rc.3",
     "react": "^15.6.1",
@@ -36,7 +40,11 @@
     "webpack": "^3.5.5"
   },
   "jest": {
-    "moduleFileExtensions": [ "ts", "tsx", "js" ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },

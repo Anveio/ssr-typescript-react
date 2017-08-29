@@ -1,6 +1,6 @@
 // tslint:disable
 
-export const data: ApiSchema = {
+export const data: ApiResponse = {
   articles: [
     {
       id: '95c12a8f6c88953ca8f8a39da25546e6',

@@ -3,7 +3,10 @@ html
   head
     title=title
     meta(name="viewport" content="width=device-width, initial-scale=1")
+    if stringify
+      script(type='text/javascript').
+        window.initialData = #{stringify(content.initialData)});
   body
     block content
-      div#root!= content
+      div#root!= content.initialMarkup
       script(src='/bundle.js' type='text/javascript')

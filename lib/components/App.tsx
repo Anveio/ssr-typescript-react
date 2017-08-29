@@ -1,26 +1,35 @@
 import * as React from 'react';
-import DataApi from '../DataApi';
-import { data } from '../testData';
+// import axios from 'axios';
+import { objToMap } from '../state-api/lib';
 
 import ArticleList from './ArticleList';
 
-interface Props {}
+interface Props {
+  initialData: {
+    articles: PlainObj<Article>;
+    authors: PlainObj<Author>;
+  };
+}
 
 interface State {
   articles: Map<string, Article>;
   authors: Map<string, Author>;
 }
 
-const api = new DataApi(data);
-
 class App extends React.PureComponent<Props, State> {
-  constructor() {
-    super();
-    this.state = {
-      articles: api.getArticles(),
-      authors: api.getAuthors()
-    };
-  }
+  state = {
+    articles: objToMap(this.props.initialData.articles),
+    authors: objToMap(this.props.initialData.authors)
+  };
+
+  // async componentDidMount() {
+  //   const rawData: ApiResponse = (await axios.get('/data')).data;
+
+  //   this.setState((): Partial<State> => ({
+  //     articles: api.getArticles(),
+  //     authors: api.getAuthors()
+  //   }));
+  // }
 
   articleActions: ArticleActionsMap = {
     lookupAuthor: (authorId: string) => this.state.authors.get(authorId)

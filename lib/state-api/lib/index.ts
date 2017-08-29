@@ -1,0 +1,37 @@
+class DataApi {
+  constructor(readonly rawData: ApiResponse) {}
+
+  public arrToMap = <T extends DataType>(arr: Array<T>): Map<string, T> => {
+    return arr.reduce(
+      (acc: Map<string, T>, cur: T) => acc.set(cur.id, cur),
+      new Map()
+    );
+  };
+
+  public getArticles(): Map<string, Article> {
+    return this.arrToMap<Article>(this.rawData.articles);
+  }
+
+  public getAuthors(): Map<string, Author> {
+    return this.arrToMap<Author>(this.rawData.authors);
+  }
+}
+
+export default DataApi;
+
+const mapToObj = <T extends DataType>(map: Map<string, T>): PlainObj<T> => {
+  console.log(Array.from(map.keys()));
+  return Array.from(map.keys()).reduce((acc: PlainObj<T>, cur: string) => {
+    const entry = map.get(cur) as DataType;
+    return Object.assign(acc, { [entry.id]: entry });
+  },                                   {});
+};
+
+const objToMap = <T extends DataType>(obj: PlainObj<T>): Map<string, T> => {
+  return Object.values(obj).reduce(
+    (acc: Map<string, T>, cur): Map<string, T> => acc.set(cur.id, cur),
+    new Map()
+  );
+};
+
+export { mapToObj, objToMap };
