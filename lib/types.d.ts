@@ -17,3 +17,7 @@ interface Author {
   lastName: string;
   website: string;
 }
+
+interface ArticleActionsMap {
+  lookupAuthor: (authorId: string) => Author | undefined
+}

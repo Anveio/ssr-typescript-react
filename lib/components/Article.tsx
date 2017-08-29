@@ -2,15 +2,40 @@ import * as React from 'react';
 
 export interface Props {
   article: Article;
-  author: Author;
+  actions: ArticleActionsMap;
 }
 
-const App = ({article, author}: Props) => {
-  return (
-    <div>
-      <h1>{article.title}</h1>
-      <h3>{author.firstName} {author.lastName}</h3>
-    </div>
-  )
+interface InlineStyleMap {
+  [key: string]: React.CSSProperties;
 }
-export default App
+
+const styles: InlineStyleMap = {
+  article: {
+    paddingBottom: 10,
+    borderBottomStyle: 'solid'
+  },
+  title: {
+    fontWeight: 'bold'
+  }
+};
+
+const dateDisplay = (dateString: string) => new Date(dateString).toDateString();
+
+const App = ({ article, actions }: Props) => {
+  const { body, title } = article;
+  const author = actions.lookupAuthor(article.authorId) as Author;
+
+  return (
+    <div style={styles.article}>
+      <div style={styles.title}>{title}</div>
+      <div>{dateDisplay(article.date)}</div>
+      <div>
+        <a href={author.website}>
+          {author.firstName} {author.lastName}
+        </a>
+      </div>
+      <div style={styles.article}>{body}</div>
+    </div>
+  );
+};
+export default App;

@@ -22,11 +22,15 @@ class App extends React.PureComponent<Props, State> {
     };
   }
 
+  articleActions: ArticleActionsMap = {
+    lookupAuthor: (authorId: string) => this.state.authors.get(authorId)
+  };
+
   public render() {
     return (
       <ArticleList
         articles={this.state.articles}
-        authors={this.state.authors}
+        actions={this.articleActions}
       />
     );
   }
