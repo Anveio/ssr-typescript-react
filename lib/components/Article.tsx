@@ -1,8 +1,9 @@
 import * as React from 'react';
+import StateApi from '../state-api/lib';
 
 export interface Props {
   article: Article;
-  actions: ArticleActionsMap;
+  store: StateApi;
 }
 
 interface InlineStyleMap {
@@ -21,9 +22,9 @@ const styles: InlineStyleMap = {
 
 const dateDisplay = (dateString: string) => new Date(dateString).toDateString();
 
-const App = ({ article, actions }: Props) => {
+const App = ({ article, store }: Props) => {
   const { body, title } = article;
-  const author = actions.lookupAuthor(article.authorId) as Author;
+  const author = store.lookupAuthor(article.authorId) as Author;
 
   return (
     <div style={styles.article}>

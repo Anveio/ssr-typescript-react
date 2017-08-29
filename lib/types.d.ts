@@ -1,8 +1,15 @@
 type DataType = Article | Author;
+type ArticleMap = Map<string, Article>;
+type AuthorMap = Map<string, Author>;
 
 interface ApiResponse {
   articles: Article[];
   authors: Author[];
+}
+
+interface Store {
+  articles: ArticleMap;
+  authors: AuthorMap;
 }
 
 interface Article {

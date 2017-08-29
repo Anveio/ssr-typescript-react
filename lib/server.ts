@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', async (req: express.Request, res: express.Response) => {
   const content = await serverRender();
-  res.render('index', { title: 'My apperino.', content, stringify });
+  res.render('index', { title: 'My apperino.', ...content, stringify });
 });
 
 app.get('/data', (req: express.Request, res: express.Response) => {

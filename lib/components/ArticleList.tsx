@@ -1,17 +1,18 @@
 import * as React from 'react';
 import Article from './Article';
+import StateApi from '../state-api/lib';
 
 export interface Props {
   articles: Map<string, Article>;
-  actions: ArticleActionsMap;
+  store: StateApi;
 }
 
-const ArticleList = ({ articles, actions }: Props) => {
+const ArticleList = ({ articles, store }: Props) => {
   return (
     <div>
       {Array.from(articles.keys()).map((id: string) => {
         const article = articles.get(id) as Article;
-        return <Article article={article} actions={actions} key={article.id} />;
+        return <Article article={article} store={store} key={article.id} />;
       })}
     </div>
   );
