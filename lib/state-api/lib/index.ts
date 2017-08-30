@@ -1,20 +1,21 @@
 class StateApi {
-  data: Store;
-  constructor(readonly rawData: ApiResponse) {
+  private readonly data: Store;
+  constructor(rawData: ApiResponse) {
     this.data = {
-      articles: this.arrToMap<Article>(this.rawData.articles),
-      authors: this.arrToMap<Author>(this.rawData.authors)
+      articles: this.arrToMap(rawData.articles),
+      authors: this.arrToMap(rawData.authors),
+      searchTerm: ''
     };
   }
 
-  public arrToMap = <T extends DataType>(arr: Array<T>): Map<string, T> => {
+  private arrToMap = <T extends DataType>(arr: Array<T>): Map<string, T> => {
     return arr.reduce(
       (acc: Map<string, T>, cur: T) => acc.set(cur.id, cur),
       new Map()
     );
   };
 
-  public lookupAuthor = (authorId: string): Author | undefined => {
+  public lookupAuthor = (authorId: string) => {
     return this.data.authors.get(authorId);
   };
 

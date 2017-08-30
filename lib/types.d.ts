@@ -10,6 +10,7 @@ interface ApiResponse {
 interface Store {
   articles: ArticleMap;
   authors: AuthorMap;
+  searchTerm: string;
 }
 
 interface Article {

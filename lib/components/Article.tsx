@@ -22,7 +22,7 @@ const styles: InlineStyleMap = {
 
 const dateDisplay = (dateString: string) => new Date(dateString).toDateString();
 
-const App = ({ article, store }: Props) => {
+const Article = ({ article, store }: Props) => {
   const { body, title } = article;
   const author = store.lookupAuthor(article.authorId) as Author;
 
@@ -39,4 +39,4 @@ const App = ({ article, store }: Props) => {
     </div>
   );
 };
-export default App;
+export default Article;
