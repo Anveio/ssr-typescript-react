@@ -10,11 +10,6 @@ const { host, port } = config;
 export default async () => {
   const response = await axios.get(`http://${host}:${port}/data`);
   const store = new StateApi(response.data);
-  // const serverData = {
-  //   articles: mapToObj<Article>(store.getArticles()),
-  //   authors: mapToObj<Author>(store.getAuthors())
-  // };
-
   return {
     initialMarkup: ReactDomServer.renderToString(<App store={store} />),
     serverData: response.data

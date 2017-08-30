@@ -1,9 +1,9 @@
 import * as React from 'react';
 import StateApi from '../state-api/lib';
-import { objToMap, mapToObj } from '../state-api/lib/utils';
 
 import ArticleList from './ArticleList';
 import SearchBar from './SearchBar';
+import Timestamp from './Timestamp';
 
 interface Props {
   store: StateApi;
@@ -16,19 +16,31 @@ interface Props {
 
 class App extends React.PureComponent<Props, Store> {
   state = this.props.store.getState();
+  subscriptionId: number = 0;
 
-  private setSearchTerm = (searchTerm: string) => {
-    this.setState({ searchTerm });
+  componentDidMount() {
+    this.subscriptionId = this.props.store.subscribe(this.onStoreChange);
+    this.props.store.startClock();
+  }
+
+  componentWillMount() {
+    this.props.store.unsubscribe(this.subscriptionId);
+  }
+
+  onStoreChange = () => {
+    this.setState(this.props.store.getState());
   };
 
   public render() {
     let { articles, searchTerm } = this.state;
+    const searchRegExp = new RegExp(searchTerm, 'i');
     if (searchTerm) {
       articles = Array.from(articles.keys())
         .filter((id: string) => {
           const article = articles.get(id) as Article;
           return (
-            article.body.match(searchTerm) || article.title.match(searchTerm)
+            article.body.match(searchRegExp) ||
+            article.title.match(searchRegExp)
           );
         })
         .reduce((acc: Map<string, Article>, cur: string) => {
@@ -38,7 +50,8 @@ class App extends React.PureComponent<Props, Store> {
     }
     return (
       <div>
-        <SearchBar doSearch={this.setSearchTerm} />
+        <Timestamp timestamp={this.state.timestamp} />
+        <SearchBar doSearch={this.props.store.setSearchTerm} />
         <ArticleList articles={articles} store={this.props.store} />
       </div>
     );

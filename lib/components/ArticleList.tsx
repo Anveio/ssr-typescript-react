@@ -8,7 +8,6 @@ export interface Props {
 }
 
 const ArticleList = ({ articles, store }: Props) => {
-  console.log(articles);
   return articles.size > 0 ? (
     <div>
       {Array.from(articles.keys()).map((id: string) => {

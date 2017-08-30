@@ -11,6 +11,7 @@ interface Store {
   articles: ArticleMap;
   authors: AuthorMap;
   searchTerm: string;
+  timestamp: Date;
 }
 
 interface Article {
