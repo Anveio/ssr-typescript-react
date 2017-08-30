@@ -1,7 +1,7 @@
-import DataApi from '../state-api/lib';
+import StateApi from '../state-api/lib';
 import { data } from '../testData';
 
-const api = new DataApi(data);
+const api = new StateApi(data);
 
 describe('DataApi', () => {
   it('exposes articles as a Map', () => {

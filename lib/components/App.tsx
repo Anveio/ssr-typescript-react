@@ -4,13 +4,6 @@ import StateApi from '../state-api/lib';
 
 import ArticleList from './ArticleList';
 
-// interface Props {
-//   initialData: {
-//     articles: PlainObj<Article>;
-//     authors: PlainObj<Author>;
-//   };
-// }
-
 interface Props {
   store: StateApi;
 }

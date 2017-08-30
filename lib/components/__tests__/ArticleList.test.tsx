@@ -1,7 +1,6 @@
 import * as React from 'react';
 import ArticleList from '../ArticleList';
-
-import * as renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
 describe('ArticleList', () => {
   const testProps = {
@@ -11,13 +10,11 @@ describe('ArticleList', () => {
     }
   };
 
-  it('renders correctly', () => {
+  it('renders correctly with no articles.', () => {
     // tslint:disable
-    const tree = renderer
-      .create(<ArticleList {...testProps as any} />)
-      .toJSON();
+    const wrapper = shallow(<ArticleList {...testProps as any} />);
+    expect(wrapper.find('Article').length).toBe(0);
 
-    console.log(tree);
-    expect(tree).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

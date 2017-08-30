@@ -1,4 +1,4 @@
-class DataApi {
+class StateApi {
   data: Store;
   constructor(readonly rawData: ApiResponse) {
     this.data = {
@@ -21,4 +21,4 @@ class DataApi {
   public getState = (): Store => this.data;
 }
 
-export default DataApi;
+export default StateApi;
