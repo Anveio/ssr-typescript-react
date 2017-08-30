@@ -14,6 +14,10 @@ class SearchBar extends React.PureComponent<Props, State> {
     searchTerm: ''
   };
 
+  componentWillUpdate() {
+    console.log('Updating SearchBar.');
+  }
+
   doSearch = debounce(() => this.props.doSearch(this.state.searchTerm), 300);
 
   private handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
