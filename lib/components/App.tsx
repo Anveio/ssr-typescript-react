@@ -1,26 +1,42 @@
 import * as React from 'react';
 import StateApi from '../state-api/lib';
-
+import * as Perf from 'react-addons-perf';
 import ArticleList from './ArticleList';
 import SearchBar from './SearchBar';
 import Timestamp from './Timestamp';
+
+if (typeof window !== 'undefined') {
+  window['Perf'] = Perf;
+}
 
 interface Props {
   store: StateApi;
 }
 
-// interface State {
-//   store: Store;
-//   searchTerm: string;
-// }
+interface State {
+  articles: Map<string, Article>;
+  searchTerm: string;
+}
 
-class App extends React.PureComponent<Props, Store> {
-  state = this.props.store.getState();
+class App extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const { articles, searchTerm } = this.props.store.getState();
+    this.state = {
+      articles,
+      searchTerm
+    };
+  }
   subscriptionId: number = 0;
 
   componentDidMount() {
     this.subscriptionId = this.props.store.subscribe(this.onStoreChange);
     this.props.store.startClock();
+    setImmediate(() => Perf.start());
+    setTimeout(() => {
+      Perf.stop();
+      Perf.printWasted();
+    }, 5000);
   }
 
   componentWillMount() {
@@ -28,7 +44,11 @@ class App extends React.PureComponent<Props, Store> {
   }
 
   onStoreChange = () => {
-    this.setState(this.props.store.getState());
+    const { articles, searchTerm } = this.props.store.getState();
+    this.setState({
+      articles,
+      searchTerm
+    });
   };
 
   public render() {
@@ -50,7 +70,7 @@ class App extends React.PureComponent<Props, Store> {
     }
     return (
       <div>
-        <Timestamp timestamp={this.state.timestamp} />
+        <Timestamp timestamp={this.props.store.getState().timestamp} />
         <SearchBar doSearch={this.props.store.setSearchTerm} />
         <ArticleList articles={articles} store={this.props.store} />
       </div>

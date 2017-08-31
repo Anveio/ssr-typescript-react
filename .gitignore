@@ -8,6 +8,8 @@ node_modules
 
 # production
 /public/bundle.js
+/public/vendor.js
+/public/app.js
 
 # misc
 .DS_Store

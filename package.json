@@ -18,12 +18,14 @@
     "@types/prop-types": "^15.5.1",
     "@types/pug": "^2.0.4",
     "@types/react": "^16.0.5",
+    "@types/react-addons-perf": "^0.14.18",
     "@types/react-dom": "^15.5.4",
     "@types/react-test-renderer": "^15.5.4",
     "awesome-typescript-loader": "^3.2.3",
     "enzyme": "^2.9.1",
     "jest": "^20.0.4",
     "nodemon": "^1.11.0",
+    "react-addons-perf": "^15.4.2",
     "source-map-loader": "^0.2.1",
     "ts-jest": "^20.0.10",
     "tslint": "^5.7.0",
@@ -31,6 +33,7 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
+    "all": "^0.0.0",
     "axios": "^0.16.2",
     "ejs": "^2.5.7",
     "express": "^4.15.4",

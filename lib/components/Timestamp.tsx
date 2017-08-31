@@ -5,7 +5,7 @@ export interface Props {
 }
 
 class Timestamp extends React.PureComponent<Props, never> {
-  private timeDisplay = (timestamp: Date) =>
+  static timeDisplay = (timestamp: Date) =>
     timestamp.toLocaleTimeString('en', {
       hour: '2-digit',
       minute: '2-digit',
@@ -13,9 +13,9 @@ class Timestamp extends React.PureComponent<Props, never> {
     });
 
   shouldComponentUpdate(nextProps: Props) {
-    const currentTimeDisplay = this.timeDisplay(this.props.timestamp);
+    const currentTimeDisplay = Timestamp.timeDisplay(this.props.timestamp);
 
-    const nextTimeDisplay = this.timeDisplay(nextProps.timestamp);
+    const nextTimeDisplay = Timestamp.timeDisplay(nextProps.timestamp);
 
     return currentTimeDisplay !== nextTimeDisplay;
   }

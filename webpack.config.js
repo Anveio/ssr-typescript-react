@@ -1,7 +1,12 @@
+const webpack = require('webpack');
+
 module.exports = {
-  entry: './lib/renderers/dom.tsx',
+  entry: {
+    vendor: [ 'react', 'react-dom', 'axios', 'lodash' ],
+    app: [ './lib/renderers/dom.tsx' ]
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: __dirname + '/public'
   },
 
@@ -25,5 +30,10 @@ module.exports = {
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       // { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    })
+  ]
 };
